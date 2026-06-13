@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+<title>MNQ Journal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden}
+:root{
+  --ink0:#0c0e12;--ink1:#13161b;--ink2:#191d24;--ink3:#1f242c;
+  --ink4:#262c35;--ink5:#2e3540;--ink6:#373f4b;
+  --b0:rgba(255,255,255,.045);--b1:rgba(255,255,255,.07);
+  --b2:rgba(255,255,255,.12);--b3:rgba(255,255,255,.18);
+  --cr:#5b8def;--cr2:#5b8def;--cr3:#7ba6f5;
+  --cra:rgba(91,141,239,.07);--crb:rgba(91,141,239,.13);
+  --crc:rgba(91,141,239,.22);--crd:rgba(91,141,239,.35);
+  --cg:#34c98e;--cg2:#34c98e;
+  --cga:rgba(52,201,142,.07);--cgb:rgba(52,201,142,.13);
+  --cgc:rgba(52,201,142,.22);--cgd:rgba(52,201,142,.35);
+  --cy:#d6a14d;--cy2:#e0b365;
+  --cya:rgba(214,161,77,.07);--cyb:rgba(214,161,77,.13);
+  --cyc:rgba(214,161,77,.22);--cyd:rgba(214,161,77,.35);
+  --cp:#9b8af7;--cp2:#ab9cf9;
+  --cpa:rgba(155,138,247,.08);--cpb:rgba(155,138,247,.16);--cpd:rgba(155,138,247,.35);
+  --cb:#5b8def;--cb2:#7ba6f5;
+  --cba:rgba(91,141,239,.07);--cbd:rgba(91,141,239,.32);
+  --ls:#e0685f;--ls2:#e0685f;
+  --lsa:rgba(224,104,95,.07);--lsb:rgba(224,104,95,.13);
+  --lsc:rgba(224,104,95,.22);--lsd:rgba(224,104,95,.35);
+  --t0:#eef0f3;--t1:#9298a5;--t2:#5b6170;
+  --fs:'Inter',system-ui,sans-serif;
+  --fd:'Source Serif 4','Georgia',serif;
+  --fm:'JetBrains Mono',monospace;
+  --r4:6px;--r6:8px;--r8:10px;--r10:12px;--r12:14px;--r16:18px;--r20:22px;--r99:999px;
+  --sw:226px;--ease:cubic-bezier(.35,0,.2,1);--spring:cubic-bezier(.34,1.4,.64,1);
+}
+body{font-family:var(--fs);background:var(--ink0);color:var(--t0);font-size:14.5px;font-weight:400;line-height:1.65;display:flex;height:100vh;-webkit-font-smoothing:antialiased;letter-spacing:.005em}
+
+/* ═══ SIDEBAR ═══════════════════════════════════════════════ */
+.sb{width:var(--sw);min-width:var(--sw);height:100vh;background:var(--ink1);border-right:1px solid var(--b0);display:flex;flex-direction:column;flex-shrink:0;position:relative;z-index:30}
+.sb-top{padding:28px 22px 22px}
+.sb-logo{display:flex;align-items:center;gap:12px}
+.sb-gem{width:36px;height:36px;border-radius:var(--r8);background:var(--ink3);border:1px solid var(--b1);display:flex;align-items:center;justify-content:center;color:var(--cr3);font-size:17px;flex-shrink:0}
+.sb-wm{line-height:1.15}
+.sb-nm{font-family:var(--fd);font-size:17px;font-weight:600;color:var(--t0);letter-spacing:-.01em}
+.sb-tg{font-size:10px;color:var(--t2);font-family:var(--fm);letter-spacing:.12em;margin-top:3px;text-transform:uppercase}
+.sb-nav{padding:8px 14px;flex:1;display:flex;flex-direction:column;gap:1px;overflow-y:auto}
+.nv{width:100%;display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:var(--r6);border:1px solid transparent;background:transparent;color:var(--t1);cursor:pointer;font-family:var(--fs);font-size:13.5px;font-weight:500;text-align:left;position:relative;transition:background .16s,color .16s}
+.nv i{font-size:17px;flex-shrink:0;color:var(--t2);transition:color .16s}
+.nv:hover{background:var(--ink2);color:var(--t0)}
+.nv:hover i{color:var(--t1)}
+.nv.on{background:var(--ink3);color:var(--t0);font-weight:500}
+.nv.on i{color:var(--cr3)}
+.nv.on::before{content:'';position:absolute;left:0;top:24%;bottom:24%;width:2px;background:var(--cr3);border-radius:2px}
+.nv-badge{margin-left:auto;background:var(--ink5);color:var(--t1);font-size:10px;font-weight:500;padding:2px 7px;border-radius:var(--r99);line-height:1.6;font-family:var(--fm)}
+.sb-ft{padding:16px 22px 24px;border-top:1px solid var(--b0);margin-top:8px}
+.mkt{display:flex;align-items:center;gap:9px}
+.mkt-dot{width:6px;height:6px;border-radius:50%;background:var(--cg2);box-shadow:0 0 0 3px var(--cga)}
+.mkt-nm{font-size:11px;font-weight:500;font-family:var(--fm);color:var(--t1);letter-spacing:.1em}
+.mkt-st{font-size:10px;color:var(--t2);font-family:var(--fm);margin-left:auto;letter-spacing:.08em}
+
+/* ═══ MAIN ═══════════════════════════════════════════════════ */
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
+.topbar{height:74px;background:transparent;border-bottom:1px solid var(--b0);padding:0 40px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.pg-h{line-height:1.3}
+.pg-ti{font-family:var(--fd);font-size:21px;font-weight:600;color:var(--t0);letter-spacing:-.01em}
+.pg-su{font-size:12px;color:var(--t2);letter-spacing:.02em;margin-top:3px;font-weight:400}
+.tb-r{display:flex;align-items:center;gap:8px}
+.content{flex:1;overflow-y:auto;padding:40px 40px 80px;background:var(--ink0)}
+.content::-webkit-scrollbar{width:5px}
+.content::-webkit-scrollbar-thumb{background:var(--ink4);border-radius:5px}
+.page-wrap{max-width:880px;margin:0 auto}
+
+/* ═══ CARDS ══════════════════════════════════════════════════ */
+.card{background:var(--ink1);border:1px solid var(--b0);border-radius:var(--r16);overflow:hidden;margin-bottom:18px;animation:up .25s var(--ease) both}
+@keyframes up{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.card-hd{padding:22px 26px 18px;display:flex;align-items:center;justify-content:space-between}
+.card-hl{display:flex;align-items:center;gap:13px}
+.cico{width:32px;height:32px;border-radius:var(--r6);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.ci-r{background:var(--cra);color:var(--cr2)}
+.ci-g{background:var(--cga);color:var(--cg2)}
+.ci-y{background:var(--cya);color:var(--cy2)}
+.ci-n{background:var(--ink3);color:var(--t1)}
+.ci-p{background:var(--cpa);color:var(--cp2)}
+.ci-b{background:var(--cba);color:var(--cb2)}
+.ct{font-family:var(--fd);font-size:16px;font-weight:600;color:var(--t0);letter-spacing:-.005em}
+.cs{font-size:12px;color:var(--t2);margin-top:3px;line-height:1.5}
+.card-bd{padding:8px 26px 26px}
+
+/* ═══ STATS ROW ═══════════════════════════════════════════════ */
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;margin-bottom:28px;background:var(--b0);border:1px solid var(--b0);border-radius:var(--r16);overflow:hidden}
+.stat{background:var(--ink1);padding:24px 22px;position:relative}
+.stat::before{display:none}
+.s-lb{font-size:11px;font-weight:500;color:var(--t2);letter-spacing:.06em;margin-bottom:10px}
+.s-vl{font-size:26px;font-weight:600;line-height:1.1;letter-spacing:-.01em;font-family:var(--fd)}
+.s-su{font-size:11px;color:var(--t2);margin-top:5px;font-weight:400}
+.stat.sr .s-vl{color:var(--ls2)}.stat.sg .s-vl{color:var(--cg2)}.stat.sy .s-vl{color:var(--cy2)}.stat.sn .s-vl{color:var(--t0)}.stat.sp .s-vl{color:var(--cp2)}
+
+/* ═══ FORM ════════════════════════════════════════════════════ */
+.fg2{display:grid;grid-template-columns:1fr 1fr;gap:18px 20px}
+.fg{display:flex;flex-direction:column;gap:7px}
+.fg.full{grid-column:1/-1}
+.lbl{font-size:12px;font-weight:500;color:var(--t1);letter-spacing:.01em}
+.req-star{color:var(--ls2);margin-left:2px}
+input,select,textarea{background:var(--ink2);border:1px solid var(--b1);border-radius:var(--r6);color:var(--t0);font-family:var(--fs);font-size:14px;padding:11px 14px;width:100%;outline:none;transition:border-color .16s,box-shadow .16s,background .16s;-webkit-appearance:none}
+input:hover,select:hover{border-color:var(--b2)}
+input:focus,select:focus,textarea:focus{border-color:var(--crd);box-shadow:0 0 0 3px var(--cra);background:var(--ink2)}
+input::placeholder,textarea::placeholder{color:var(--t2)}
+input:disabled{opacity:.4;cursor:not-allowed;background:var(--ink1)}
+textarea{resize:vertical;min-height:92px;line-height:1.7}
+select{cursor:pointer}
+select option{background:var(--ink2)}
+input[type=file]{display:none}
+.dir-row{display:flex;gap:8px}
+.dir-opt{flex:1;padding:11px;text-align:center;border-radius:var(--r6);border:1px solid var(--b1);background:var(--ink2);color:var(--t1);cursor:pointer;font-family:var(--fs);font-size:13.5px;font-weight:500;letter-spacing:.01em;transition:all .16s;user-select:none}
+.dir-opt:hover{border-color:var(--b2);color:var(--t0)}
+.dir-opt.long.on{background:var(--cga);color:var(--cg2);border-color:var(--cgd)}
+.dir-opt.short.on{background:var(--lsa);color:var(--ls2);border-color:var(--lsd)}
+.vbox{padding:11px 14px;border-radius:var(--r6);border:1px solid var(--b1);background:var(--ink2);font-family:var(--fm);font-size:17px;font-weight:500;text-align:center;color:var(--t2);transition:all .25s}
+.vbox.profit{background:var(--cga);border-color:var(--cgd);color:var(--cg2)}
+.vbox.loss{background:var(--lsa);border-color:var(--lsd);color:var(--ls2)}
+.rrbox{padding:11px 14px;border-radius:var(--r6);border:1px solid var(--b1);background:var(--ink2);font-family:var(--fm);font-size:12.5px;font-weight:500;text-align:center;color:var(--t2);transition:all .25s;line-height:1.5}
+.rrbox.poor{background:var(--lsa);border-color:var(--lsd);color:var(--ls2)}
+.rrbox.decent{background:var(--cya);border-color:var(--cyd);color:var(--cy2)}
+.rrbox.strong{background:var(--cga);border-color:var(--cgd);color:var(--cg2)}
+.file-btn{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:var(--r6);border:1px dashed var(--b2);background:var(--ink2);color:var(--t2);cursor:pointer;font-size:13.5px;font-weight:400;transition:all .16s}
+.file-btn:hover{border-color:var(--crd);color:var(--cr3);background:var(--cra)}
+
+/* ═══ BUTTONS ════════════════════════════════════════════════ */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:var(--r6);border:1px solid var(--b1);background:var(--ink2);color:var(--t0);font-family:var(--fs);font-size:13.5px;font-weight:500;cursor:pointer;transition:all .15s;white-space:nowrap}
+.btn:hover{background:var(--ink3);border-color:var(--b2)}
+.btn:active{transform:scale(.98)}
+.btn i{font-size:15px}
+.btn-primary{background:var(--cr2);border-color:var(--cr2);color:#0c0e12;font-weight:600}
+.btn-primary:hover{background:var(--cr3);border-color:var(--cr3)}
+.btn-primary:disabled,.btn-approve:disabled{opacity:.35;cursor:not-allowed;pointer-events:none}
+.btn-approve{background:var(--cga);color:var(--cg2);border-color:var(--cgd)}
+.btn-approve:hover{background:var(--cgb)}
+.btn-approve:disabled{opacity:.35;cursor:not-allowed;pointer-events:none}
+.btn-del{background:transparent;color:var(--t2);border-color:var(--b1)}
+.btn-del:hover{background:var(--lsa);color:var(--ls2);border-color:var(--lsd)}
+.btn-ghost{background:transparent;color:var(--t1);border-color:transparent}
+.btn-ghost:hover{background:var(--ink2);color:var(--t0);border-color:var(--b1)}
+.btn-sm{padding:7px 13px;font-size:12.5px;gap:6px}
+.btn-sm i{font-size:13px}
+.btn-icon{width:36px;height:36px;padding:0;justify-content:center;border-radius:var(--r6)}
+
+/* ═══ STATUS CHIPS ════════════════════════════════════════════ */
+.ch{display:inline-flex;align-items:center;padding:4px 10px;border-radius:var(--r99);font-size:11px;font-weight:500;letter-spacing:.03em;white-space:nowrap}
+.ch-long{background:var(--cga);color:var(--cg2)}
+.ch-short{background:var(--lsa);color:var(--ls2)}
+.ch-warn{background:var(--cya);color:var(--cy2)}
+.ch-muted{background:var(--ink3);color:var(--t1)}
+.ch-err{background:var(--lsa);color:var(--ls2)}
+.ch-live{background:var(--cga);color:var(--cg2)}
+.ch-sim{background:var(--cya);color:var(--cy2)}
+.ch-miss{background:var(--cpa);color:var(--cp2)}
+
+/* ═══ SELECTABLE PILLS — FIXED ═══════════════════════════════
+   Pure div-based. No label/input wrapping.
+   onclick on the div only. No double-fire.
+══════════════════════════════════════════════════════════════ */
+.pill-wrap{display:flex;flex-wrap:wrap;gap:8px}
+.pill{display:inline-flex;align-items:center;padding:8px 16px;border-radius:var(--r99);border:1px solid var(--b1);background:var(--ink2);cursor:pointer;font-size:12.5px;font-weight:400;color:var(--t1);letter-spacing:.01em;user-select:none;transition:background .18s,border-color .18s,color .18s,transform .12s}
+.pill:hover{border-color:var(--b2);color:var(--t0);background:var(--ink3)}
+.pill:active{transform:scale(.97)}
+.pill.pm.on{background:var(--lsa);color:var(--ls2);border-color:var(--lsd);font-weight:500}
+.pill.pa.on{background:var(--cya);color:var(--cy2);border-color:var(--cyd);font-weight:500}
+.pill.pe.on{background:var(--cpa);color:var(--cp2);border-color:var(--cpd);font-weight:500}
+.pill.pw.on{background:var(--cga);color:var(--cg2);border-color:var(--cgd);font-weight:500}
+
+/* ═══ RETAKE ══════════════════════════════════════════════════ */
+.rtk-row{display:flex;gap:8px}
+.rtk{flex:1;padding:11px;text-align:center;border-radius:var(--r6);border:1px solid var(--b1);background:var(--ink2);color:var(--t1);cursor:pointer;font-family:var(--fs);font-size:13.5px;font-weight:500;transition:all .16s;user-select:none}
+.rtk:hover{border-color:var(--b2);color:var(--t0)}
+.rtk.ry{background:var(--cga);color:var(--cg2);border-color:var(--cgd)}
+.rtk.rn{background:var(--lsa);color:var(--ls2);border-color:var(--lsd)}
+.rtk.rm{background:var(--cya);color:var(--cy2);border-color:var(--cyd)}
+
+/* ═══ TRADE CARD (history / journal entry) ════════════════════ */
+.tc{background:var(--ink1);border:1px solid var(--b0);border-radius:var(--r16);padding:22px 24px;margin-bottom:14px;animation:up .2s var(--ease) both;cursor:pointer;transition:border-color .18s,background .18s}
+.tc:hover{border-color:var(--b2);background:var(--ink2)}
+.tc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:14px}
+.tc-left{display:flex;align-items:center;gap:14px}
+.tc-ico{width:42px;height:42px;border-radius:var(--r8);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;position:relative}
+.tc-ico.long{background:var(--cga);color:var(--cg2)}
+.tc-ico.short{background:var(--lsa);color:var(--ls2)}
+.tc-nm{font-family:var(--fd);font-size:15px;font-weight:600;color:var(--t0);letter-spacing:-.005em}
+.tc-dt{font-size:12px;color:var(--t2);margin-top:3px;font-weight:400}
+.tc-pnl{font-size:21px;font-weight:600;font-family:var(--fd);letter-spacing:-.01em;line-height:1;text-align:right}
+.tc-pnl.win{color:var(--cg2)}.tc-pnl.loss{color:var(--ls2)}.tc-pnl.flat{color:var(--t2)}
+.tc-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.mv{font-size:12.5px;color:var(--t1);font-family:var(--fm)}
+.sep{color:var(--t2);font-size:12px}
+.tc-thumb{width:100%;height:140px;border-radius:var(--r8);object-fit:cover;margin-top:12px;border:1px solid var(--b1);cursor:pointer}
+.tc-no-shot{display:none}
+
+/* ═══ REVIEW PANEL ════════════════════════════════════════════ */
+.rev-panel{margin-top:20px;border-top:1px solid var(--b0);padding-top:22px}
+.ctx-banner{display:flex;align-items:center;gap:11px;padding:13px 18px;border-radius:var(--r10);margin-bottom:18px;font-size:13px;font-weight:500}
+.ctx-banner.win-ctx{background:var(--cga);border:1px solid var(--cgd);color:var(--cg2)}
+.ctx-banner.loss-ctx{background:var(--lsa);border:1px solid var(--lsd);color:var(--ls2)}
+.ctx-banner i{font-size:16px}
+.rev-step{background:var(--ink2);border:1px solid var(--b0);border-radius:var(--r12);padding:20px 22px;margin-bottom:14px}
+.rs-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px}
+.rs-lft{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:500;color:var(--t0)}
+.rs-lft i{font-size:15px}
+.badge-req{font-size:10px;color:var(--ls2);font-family:var(--fm);background:var(--lsa);padding:3px 8px;border-radius:var(--r99);letter-spacing:.04em}
+.badge-ok{font-size:10px;color:var(--cg2);font-family:var(--fm);background:var(--cga);padding:3px 8px;border-radius:var(--r99);letter-spacing:.04em}
+.badge-opt{font-size:10px;color:var(--t2);font-family:var(--fm);background:var(--ink3);padding:3px 8px;border-radius:var(--r99);letter-spacing:.04em}
+.rev-footer{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:18px;padding-top:18px;border-top:1px solid var(--b0);flex-wrap:wrap}
+.rev-st{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--t2)}
+.rev-st.ok{color:var(--cg2)}
+.rev-st i{font-size:15px}
+.xbtn{background:none;border:1px solid var(--b1);color:var(--t1);cursor:pointer;font-family:var(--fs);font-size:12.5px;font-weight:500;padding:8px 14px;border-radius:var(--r6);display:flex;align-items:center;gap:6px;transition:all .15s}
+.xbtn:hover{background:var(--ink2);color:var(--t0);border-color:var(--b2)}
+
+/* ═══ TRADE DETAIL MODAL ══════════════════════════════════════ */
+.modal-overlay{position:fixed;inset:0;background:rgba(8,9,12,.78);z-index:1000;display:flex;align-items:center;justify-content:center;padding:24px;animation:fadeIn .2s var(--ease);backdrop-filter:blur(4px)}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.modal{background:var(--ink1);border:1px solid var(--b1);border-radius:var(--r20);width:100%;max-width:760px;max-height:88vh;overflow-y:auto;animation:slideUp .25s var(--ease)}
+@keyframes slideUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.modal::-webkit-scrollbar{width:5px}
+.modal::-webkit-scrollbar-thumb{background:var(--ink4);border-radius:5px}
+.modal-hd{padding:24px 30px;border-bottom:1px solid var(--b0);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--ink1);z-index:10}
+.modal-title{font-family:var(--fd);font-size:18px;font-weight:600;color:var(--t0);letter-spacing:-.01em}
+.modal-bd{padding:30px}
+.det-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-bottom:24px;background:var(--b0);border:1px solid var(--b0);border-radius:var(--r12);overflow:hidden}
+.det-cell{background:var(--ink2);padding:16px 20px}
+.det-lbl{font-size:11px;font-weight:500;color:var(--t2);letter-spacing:.05em;margin-bottom:6px}
+.det-val{font-size:16px;font-weight:500;font-family:var(--fd);color:var(--t0)}
+.det-val.win{color:var(--cg2)}.det-val.loss{color:var(--ls2)}
+.sec-hd2{font-family:var(--fd);font-size:15px;font-weight:600;color:var(--t0);margin:28px 0 14px;display:flex;align-items:center;gap:8px}
+.sec-hd2 i{font-size:16px;color:var(--t2)}
+.ref-box{background:var(--ink2);border:1px solid var(--b0);border-radius:var(--r10);padding:16px 20px;margin-bottom:10px}
+.ref-q{font-size:11px;font-weight:500;color:var(--t2);letter-spacing:.04em;margin-bottom:8px;text-transform:uppercase}
+.ref-a{font-size:14px;color:var(--t0);line-height:1.75;font-family:var(--fd)}
+.shot-full{width:100%;border-radius:var(--r10);border:1px solid var(--b1);cursor:pointer;transition:opacity .16s}
+.shot-full:hover{opacity:.92}
+.lightbox{position:fixed;inset:0;background:rgba(5,6,8,.96);z-index:2000;display:flex;align-items:center;justify-content:center;cursor:zoom-out;animation:fadeIn .15s}
+.lightbox img{max-width:94vw;max-height:94vh;border-radius:var(--r8);object-fit:contain}
+
+/* ═══ WEEKLY REVIEW ═══════════════════════════════════════════ */
+.wk-section{background:var(--ink1);border:1px solid var(--b0);border-radius:var(--r16);overflow:hidden;margin-bottom:22px}
+.wk-banner{padding:24px 26px;border-bottom:1px solid var(--b0);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.wk-title{font-family:var(--fd);font-size:18px;font-weight:600;color:var(--t0);letter-spacing:-.005em}
+.wk-sub{font-size:12px;color:var(--t2);margin-top:4px}
+.wk-insights{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1px;background:var(--b0)}
+.wi{background:var(--ink1);padding:16px 18px}
+.wi-lb{font-size:10.5px;font-weight:500;color:var(--t2);letter-spacing:.05em;margin-bottom:6px}
+.wi-vl{font-size:17px;font-weight:600;font-family:var(--fd);color:var(--t0)}
+.wi-vl.g{color:var(--cg2)}.wi-vl.r{color:var(--ls2)}.wi-vl.y{color:var(--cy2)}
+.wk-qs{padding:24px 26px;border-top:1px solid var(--b0)}
+.wk-trades-list{padding:20px 26px;border-top:1px solid var(--b0)}
+
+/* ═══ BARS ════════════════════════════════════════════════════ */
+.bar-row{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.bar-lbl{font-size:13px;color:var(--t1);min-width:150px;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar-track{flex:1;height:3px;background:var(--ink3);border-radius:3px;overflow:hidden}
+.bar-fill{height:100%;border-radius:3px;background:var(--cr);transition:width .6s var(--ease)}
+.bar-fill.g{background:var(--cg)}.bar-fill.y{background:var(--cy)}.bar-fill.p{background:var(--cp)}
+.bar-ct{font-size:12px;color:var(--t2);font-family:var(--fm);min-width:24px;text-align:right}
+
+/* ═══ TABLES ══════════════════════════════════════════════════ */
+.dtbl{width:100%;border-collapse:collapse}
+.dtbl th{text-align:left;padding:12px 16px;font-size:10.5px;font-weight:500;color:var(--t2);letter-spacing:.06em;border-bottom:1px solid var(--b0)}
+.dtbl td{padding:13px 16px;font-size:13px;border-bottom:1px solid var(--b0)}
+.dtbl tr:last-child td{border-bottom:none}
+.dtbl tbody tr{cursor:pointer}
+.dtbl tbody tr:hover td{background:var(--ink2)}
+
+/* ═══ MISC ════════════════════════════════════════════════════ */
+.sec-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:10px}
+.sec-tt{font-family:var(--fd);font-size:19px;font-weight:600;color:var(--t0);letter-spacing:-.01em}
+.sec-lb{font-size:11px;font-weight:500;color:var(--t2);letter-spacing:.08em;margin:32px 0 14px;display:flex;align-items:center;gap:8px}
+.alert{display:flex;align-items:flex-start;gap:12px;padding:15px 18px;border-radius:var(--r10);font-size:13.5px;margin-bottom:22px;line-height:1.6}
+.alert i{font-size:16px;margin-top:1px;flex-shrink:0}
+.al-warn{background:var(--cya);color:var(--cy2);border:1px solid var(--cyd)}
+.al-info{background:var(--ink2);color:var(--t1);border:1px solid var(--b1)}
+.al-ok{background:var(--cga);color:var(--cg2);border:1px solid var(--cgd)}
+.empty{text-align:center;padding:90px 30px;display:flex;flex-direction:column;align-items:center;gap:16px}
+.empty-ico{width:60px;height:60px;border-radius:var(--r16);background:var(--ink2);border:1px solid var(--b1);display:flex;align-items:center;justify-content:center;font-size:24px;color:var(--t2)}
+.empty h3{font-family:var(--fd);font-size:18px;font-weight:600;color:var(--t0)}
+.empty p{font-size:13.5px;color:var(--t1);max-width:320px;line-height:1.7}
+.two-col{display:flex;gap:18px}
+.col{flex:1;min-width:0}
+.divider{height:1px;background:var(--b0);margin:18px 0}
+.te{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.te-tag{display:flex;align-items:center;gap:8px;padding:7px 12px 7px 14px;border-radius:var(--r99);border:1px solid var(--b1);background:var(--ink2);font-size:12.5px;color:var(--t0)}
+.te-tag button{background:none;border:none;color:var(--t2);cursor:pointer;font-size:15px;line-height:1;display:flex;align-items:center;transition:color .14s;font-family:var(--fs);padding:0}
+.te-tag button:hover{color:var(--ls2)}
+.add-row{display:flex;gap:10px}
+.add-row input{flex:1}
+.mc{padding:3px 9px;border-radius:var(--r99);font-size:10.5px;font-weight:500;letter-spacing:.02em;background:var(--lsa);color:var(--ls2)}
+.rrb{padding:3px 9px;border-radius:var(--r99);font-size:10.5px;font-weight:500;font-family:var(--fm)}
+.rrb.poor{background:var(--lsa);color:var(--ls2)}
+.rrb.decent{background:var(--cya);color:var(--cy2)}
+.rrb.strong{background:var(--cga);color:var(--cg2)}
+.settings-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.stab{padding:8px 16px;border-radius:var(--r99);border:1px solid var(--b1);background:transparent;color:var(--t1);font-family:var(--fs);font-size:12.5px;font-weight:500;cursor:pointer;transition:all .15s}
+.stab:hover{background:var(--ink2);color:var(--t0)}
+.stab.on{background:var(--ink3);color:var(--t0);border-color:var(--b2)}
+@media(max-width:780px){
+  :root{--sw:64px}
+  .sb-wm,.nv span,.mkt-nm,.mkt-st{display:none}
+  .sb-top{padding:22px 0;display:flex;justify-content:center}
+  .sb-nav{padding:8px}
+  .nv{justify-content:center;padding:12px}
+  .nv i{margin:0}
+  .nv.on::before{display:none}
+  .sb-ft{display:none}
+  .topbar{padding:0 22px}
+  .content{padding:24px 22px 60px}
+  .fg2,.two-col{grid-template-columns:1fr;flex-direction:column}
+  .stats-row{grid-template-columns:1fr 1fr}
+  .det-grid{grid-template-columns:1fr 1fr}
+  .modal{max-height:95vh}
+}
+</style>
+</head>
+<body>
+<aside class="sb">
+  <div class="sb-top">
+    <div class="sb-logo">
+      <div class="sb-gem"><i class="ti ti-chart-candle-filled"></i></div>
+      <div class="sb-wm">
+        <div class="sb-nm">TradeLog</div>
+        <div class="sb-tg">MNQ JOURNAL</div>
+      </div>
+    </div>
+  </div>
+  <nav class="sb-nav" id="sb-nav"></nav>
+  <div class="sb-ft">
+    <div class="mkt">
+      <div class="mkt-dot"></div>
+      <span class="mkt-nm">MNQ</span>
+      <span class="mkt-st">● LIVE</span>
+    </div>
+  </div>
+</aside>
+<div class="main">
+  <div class="topbar">
+    <div class="pg-h">
+      <div class="pg-ti" id="pg-ti">Log Trade</div>
+      <div class="pg-su" id="pg-su">MNQ / MICRO NASDAQ FUTURES</div>
+    </div>
+    <div class="tb-r" id="tb-r"></div>
+  </div>
+  <div class="content" id="content"></div>
+</div>
+<div id="modal-root"></div>
+<script>
+'use strict';
+// ════════════════════════════════════════════════════════════════
+//  DEFAULT DATA
+// ════════════════════════════════════════════════════════════════
+const DEF = {
+  mistakes:     ['FOMO Entry','Revenge Trading','Early Entry','Late Entry','Ignored Confirmation',
+                 'Overtrading','Risk Too High','Ignored Stop Loss','Emotional Exit','No Mistake / Clean Trade','Other'],
+  improvements: ['Wait For Confirmation','Reduce Risk','Follow Checklist','Follow Session Plan',
+                 'Stick To Plan','Reduce Position Size','Avoid Trading After Loss','Improve Timing','Other'],
+  emotions:     ['Calm','Hesitant','FOMO','Greedy','Tired','Overconfident','Revenge','Bored'],
+  tradeTypes:   ['Live Executed','Simulated','Missed Trade'],
+  sessions:     ['London','NY Open','Lunch','Power Hour','Asia'],
+  winQs:        ['What went well in this trade?','What could have been executed better?',
+                 'Did I leave profits on the table?','Was entry timing optimal?','Would I replicate this exact setup?'],
+  lossQs:       ['What was the main cause of this loss?','Why was my directional idea wrong?',
+                 'What confirmation was missing before entry?','Was this an emotional or systematic trade?',
+                 'What should I have done differently?'],
+  weeklyQs:     ['What pattern kept repeating this week?','What was the biggest mistake?',
+                 'What was the best execution?','What behavior cost the most money?',
+                 'What improved compared to last week?','What is the #1 focus for next week?'],
+};
+
+// ════════════════════════════════════════════════════════════════
+//  PERSISTENCE
+// ════════════════════════════════════════════════════════════════
+const LS = {
+  get: (k,d) => { try { const v=localStorage.getItem(k); return v?JSON.parse(v):d; } catch { return d; } },
+  set: (k,v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
+};
+
+let S = {
+  tab: 'log',
+  stab: 'mistakes',          // settings sub-tab
+  trades:       LS.get('mnq_trades', []),
+  mistakes:     LS.get('mnq_mistakes', DEF.mistakes),
+  improvements: LS.get('mnq_improvements', DEF.improvements),
+  emotions:     LS.get('mnq_emotions', DEF.emotions),
+  tradeTypes:   LS.get('mnq_tradeTypes', DEF.tradeTypes),
+  sessions:     LS.get('mnq_sessions', DEF.sessions),
+  winQs:        LS.get('mnq_winQs', DEF.winQs),
+  lossQs:       LS.get('mnq_lossQs', DEF.lossQs),
+  weeklyQs:     LS.get('mnq_weeklyQs', DEF.weeklyQs),
+  openReview:   null,
+  draft:        null,
+  detailId:     null,        // trade being viewed in modal
+  weeklyDrafts: LS.get('mnq_weeklyDrafts', {}),  // { weekKey: { answers:{}, completedTrades:[] } }
+};
+
+const persist = () => {
+  LS.set('mnq_trades',       S.trades);
+  LS.set('mnq_mistakes',     S.mistakes);
+  LS.set('mnq_improvements', S.improvements);
+  LS.set('mnq_emotions',     S.emotions);
+  LS.set('mnq_tradeTypes',   S.tradeTypes);
+  LS.set('mnq_sessions',     S.sessions);
+  LS.set('mnq_winQs',        S.winQs);
+  LS.set('mnq_lossQs',       S.lossQs);
+  LS.set('mnq_weeklyQs',     S.weeklyQs);
+  LS.set('mnq_weeklyDrafts', S.weeklyDrafts);
+};
+
+// ════════════════════════════════════════════════════════════════
+//  HELPERS
+// ════════════════════════════════════════════════════════════════
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2,6);
+const H = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+
+function calcPnL(entry, exit, size, dir) {
+  const e=parseFloat(entry), x=parseFloat(exit), s=parseFloat(size)||1;
+  if (!entry||!exit||isNaN(e)||isNaN(x)) return null;
+  const ticks = dir==='long' ? (x-e)/0.25 : (e-x)/0.25;
+  return +(ticks * 0.5 * s).toFixed(2);
+}
+function calcRR(entry, sl, tp, dir) {
+  const e=parseFloat(entry), s=parseFloat(sl), t=parseFloat(tp);
+  if (!entry||!sl||!tp||isNaN(e)||isNaN(s)||isNaN(t)) return null;
+  const risk = dir==='long' ? e-s : s-e;
+  const rwd  = dir==='long' ? t-e : e-t;
+  if (risk<=0||rwd<=0) return null;
+  return { risk, reward:rwd, ratio:+(rwd/risk).toFixed(2) };
+}
+const rrCls = r => !r ? '' : r<1 ? 'poor' : r<2 ? 'decent' : 'strong';
+const rrLabel = r => !r ? '—' : `1:${r}`;
+const typeChipCls = tp => tp==='Simulated'?'ch-sim':tp==='Missed Trade'?'ch-miss':'ch-live';
+const pnlStr = (pnl) => pnl!=null ? (pnl>=0?'+':'')+pnl.toFixed(2) : '—';
+const pnlCls2 = (pnl) => pnl!=null ? (pnl>0?'win':'loss') : 'flat';
+
+const fmt = ts => {
+  const d = new Date(ts);
+  return d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})
+    + ' · ' + d.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
+};
+const fmtDate = ts => new Date(ts).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+const fmtWk = k => {
+  const d=new Date(k+'T00:00:00'), s=new Date(d);
+  s.setDate(d.getDate()+6);
+  return d.toLocaleDateString('en-US',{month:'short',day:'numeric'})+' – '+s.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+};
+const fmtMo = k => { const[y,m]=k.split('-'); return new Date(+y,+m-1,1).toLocaleDateString('en-US',{month:'long',year:'numeric'}); };
+const weekKey = ts => { const d=new Date(ts),mn=new Date(d); mn.setDate(d.getDate()-d.getDay()+1); return mn.toISOString().slice(0,10); };
+const monthKey = ts => { const d=new Date(ts); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`; };
+const groupBy = (arr, fn) => { const m={}; arr.forEach(t=>{const k=fn(t);if(!m[k])m[k]=[];m[k].push(t)}); return m; };
+
+const approvedTrades = () => S.trades.filter(t => t.status==='approved');
+const queuedTrades   = () => S.trades.filter(t => t.status==='queued');
+const isWin = t => t.pnl != null && t.pnl > 0;
+
+// ════════════════════════════════════════════════════════════════
+//  NAV
+// ════════════════════════════════════════════════════════════════
+const PAGES = [
+  { id:'log',      icon:'ti-circle-plus',          label:'Log Trade' },
+  { id:'queue',    icon:'ti-clock-hour-4',          label:'Review Queue' },
+  { id:'history',  icon:'ti-list-details',          label:'Trade History' },
+  { id:'analytics',icon:'ti-chart-bar',             label:'Analytics' },
+  { id:'weekly',   icon:'ti-calendar-week',          label:'Weekly Review' },
+  { id:'settings', icon:'ti-adjustments-horizontal', label:'Settings' },
+];
+const PAGE_META = {
+  log:      { title:'Log Trade',          sub:'MNQ / MICRO NASDAQ FUTURES' },
+  queue:    { title:'Review Queue',       sub:'DEEP REVIEW — ALL REQUIRED FIELDS' },
+  history:  { title:'Trade History',      sub:'ALL TRADES — CLICK TO VIEW DETAIL' },
+  analytics:{ title:'Analytics',         sub:'APPROVED TRADES ONLY' },
+  weekly:   { title:'Weekly Review',      sub:'CHART REPLAY & BEHAVIORAL ANALYSIS' },
+  settings: { title:'Settings',          sub:'CUSTOMISE EVERY REVIEW ELEMENT' },
+};
+
+// ════════════════════════════════════════════════════════════════
+//  RENDER ORCHESTRATOR
+// ════════════════════════════════════════════════════════════════
+function render() {
+  const qc = queuedTrades().length;
+  document.getElementById('sb-nav').innerHTML = PAGES.map(p => `
+    <button class="nv${S.tab===p.id?' on':''}" onclick="setTab('${p.id}')">
+      <i class="ti ${p.icon}"></i>
+      <span>${p.label}</span>
+      ${p.id==='queue'&&qc?`<span class="nv-badge">${qc}</span>`:''}
+    </button>`).join('');
+  const m = PAGE_META[S.tab];
+  document.getElementById('pg-ti').textContent = m.title;
+  document.getElementById('pg-su').textContent = m.sub;
+  const tr = document.getElementById('tb-r');
+  if (S.tab==='analytics'||S.tab==='history') {
+    tr.innerHTML = `<span style="font-size:11px;color:var(--t2);font-family:var(--fm)">${approvedTrades().length} APPROVED</span>`;
+  } else if (S.tab==='queue') {
+    tr.innerHTML = qc ? `<span class="ch ch-err">${qc} PENDING</span>` : `<span class="ch ch-muted">CLEAR</span>`;
+  } else tr.innerHTML = '';
+  document.getElementById('content').innerHTML = '<div class="page-wrap">' + ({
+    log:       renderLog,
+    queue:     renderQueue,
+    history:   renderHistory,
+    analytics: renderAnalytics,
+    weekly:    renderWeekly,
+    settings:  renderSettings,
+  })[S.tab]() + '</div>';
+}
+const setTab = t => { S.tab=t; S.openReview=null; render(); };
+
+// ════════════════════════════════════════════════════════════════
+//  LOG TRADE
+// ════════════════════════════════════════════════════════════════
+let LF = { dir:'long', entry:'', exit:'', size:'', sl:'', tp:'', session:'', tradeType:'', notes:'' };
+let pendingShot = null;
+
+function renderLog() {
+  const pnl = calcPnL(LF.entry, LF.exit, LF.size, LF.dir);
+  const rr  = calcRR(LF.entry, LF.sl, LF.tp, LF.dir);
+  const pCls = pnl===null ? '' : pnl>=0 ? ' profit' : ' loss';
+  const pTxt = pnl===null ? '—' : pnlStr(pnl);
+  const rCls = rr ? ' '+rrCls(rr.ratio) : '';
+  const rTxt = rr ? `1:${rr.ratio}  ·  Risk ${rr.risk.toFixed(1)} / Reward ${rr.reward.toFixed(1)}` : 'Enter Entry + SL + TP to calculate';
+  const recent = approvedTrades().slice(0, 5);
+  return `
+  <div class="card">
+    <div class="card-hd">
+      <div class="card-hl">
+        <div class="cico ci-r"><i class="ti ti-circle-plus"></i></div>
+        <div><div class="ct">New Trade Entry</div><div class="cs">Goes to Review Queue — not in stats until approved</div></div>
+      </div>
+    </div>
+    <div class="card-bd">
+      <div class="fg2">
+        <div class="fg"><div class="lbl">Asset</div><input value="MNQ — Micro Nasdaq Futures" disabled></div>
+        <div class="fg">
+          <div class="lbl">Trade Type</div>
+          <select onchange="lfSet('tradeType',this.value)">
+            <option value="">Select type…</option>
+            ${S.tradeTypes.map(t=>`<option value="${H(t)}"${LF.tradeType===t?' selected':''}>${H(t)}</option>`).join('')}
+          </select>
+        </div>
+        <div class="fg">
+          <div class="lbl">Session</div>
+          <select onchange="lfSet('session',this.value)">
+            <option value="">Select session…</option>
+            ${S.sessions.map(s=>`<option value="${H(s)}"${LF.session===s?' selected':''}>${H(s)}</option>`).join('')}
+          </select>
+        </div>
+        <div class="fg">
+          <div class="lbl">Position Size <span style="color:var(--t2)">(contracts)</span></div>
+          <input type="number" step="1" min="1" value="${H(LF.size)}" placeholder="e.g. 2" oninput="lfSet('size',this.value)">
+        </div>
+        <div class="fg">
+          <div class="lbl">Direction</div>
+          <div class="dir-row">
+            <div class="dir-opt long${LF.dir==='long'?' on':''}" onclick="lfDir('long')">▲ Long</div>
+            <div class="dir-opt short${LF.dir==='short'?' on':''}" onclick="lfDir('short')">▼ Short</div>
+          </div>
+        </div>
+        <div class="fg"><div class="lbl">Entry Price</div><input type="number" step="0.25" value="${H(LF.entry)}" placeholder="e.g. 21050.00" oninput="lfSet('entry',this.value)"></div>
+        <div class="fg"><div class="lbl">Exit Price</div><input type="number" step="0.25" value="${H(LF.exit)}" placeholder="e.g. 21110.00" oninput="lfSet('exit',this.value)"></div>
+        <div class="fg"><div class="lbl">Stop Loss (SL)</div><input type="number" step="0.25" value="${H(LF.sl)}" placeholder="e.g. 21030.00" oninput="lfSet('sl',this.value)"></div>
+        <div class="fg"><div class="lbl">Take Profit (TP)</div><input type="number" step="0.25" value="${H(LF.tp)}" placeholder="e.g. 21110.00" oninput="lfSet('tp',this.value)"></div>
+        <div class="fg"><div class="lbl">P&L (Auto)</div><div class="vbox${pCls}" id="pnl-d">${pTxt}</div></div>
+        <div class="fg"><div class="lbl">Planned RR</div><div class="rrbox${rCls}" id="rr-d">${rTxt}</div></div>
+        <div class="fg full">
+          <div class="lbl">Screenshot <span style="color:var(--t2)">(optional — persists with trade)</span></div>
+          <label class="file-btn" for="lf-shot">
+            <i class="ti ti-photo"></i>
+            <span id="shot-lbl">Attach chart screenshot…</span>
+          </label>
+          <input type="file" id="lf-shot" accept="image/*" onchange="handleShot(this)">
+        </div>
+        <div class="fg full">
+          <div class="lbl">Notes <span style="color:var(--t2)">(optional)</span></div>
+          <textarea placeholder="Setup description, market context…" oninput="lfSet('notes',this.value)">${H(LF.notes)}</textarea>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:flex-end;margin-top:17px;padding-top:15px;border-top:1px solid var(--b0)">
+        <button class="btn btn-primary" onclick="submitTrade()"><i class="ti ti-arrow-right"></i> Add to Review Queue</button>
+      </div>
+    </div>
+  </div>
+  ${recent.length ? `<div class="sec-lb"><i class="ti ti-history"></i> Recent Approved</div>${recent.map(tradeCard).join('')}` : ''}`;
+}
+
+function handleShot(el) {
+  const f=el.files[0]; if (!f) return;
+  document.getElementById('shot-lbl').textContent = f.name;
+  const r=new FileReader(); r.onload=e=>{pendingShot=e.target.result}; r.readAsDataURL(f);
+}
+function lfSet(k, v) {
+  LF[k]=v;
+  const pnl=calcPnL(LF.entry,LF.exit,LF.size,LF.dir);
+  const pd=document.getElementById('pnl-d');
+  if (pd) { pd.className='vbox'+(pnl===null?'':(pnl>=0?' profit':' loss')); pd.textContent=pnl===null?'—':pnlStr(pnl); }
+  const rr=calcRR(LF.entry,LF.sl,LF.tp,LF.dir);
+  const rd=document.getElementById('rr-d');
+  if (rd) { rd.className='rrbox'+(rr?' '+rrCls(rr.ratio):''); rd.textContent=rr?`1:${rr.ratio}  ·  Risk ${rr.risk.toFixed(1)} / Reward ${rr.reward.toFixed(1)}`:'Enter Entry + SL + TP to calculate'; }
+}
+function lfDir(d) {
+  LF.dir=d;
+  document.querySelectorAll('.dir-opt').forEach(el=>el.classList.toggle('on',el.classList.contains(d)));
+  lfSet('_','');
+}
+function submitTrade() {
+  const entry=parseFloat(LF.entry), exit=parseFloat(LF.exit);
+  if (isNaN(entry)||isNaN(exit)) { alert('Please enter entry and exit prices.'); return; }
+  const pnl=calcPnL(LF.entry,LF.exit,LF.size,LF.dir);
+  const rr=calcRR(LF.entry,LF.sl,LF.tp,LF.dir);
+  S.trades.unshift({
+    id:uid(), ts:Date.now(), asset:'MNQ',
+    direction:LF.dir, entry, exit,
+    size:parseFloat(LF.size)||1,
+    sl:parseFloat(LF.sl)||null, tp:parseFloat(LF.tp)||null,
+    plannedRR:rr?rr.ratio:null, pnl,
+    notes:LF.notes.trim(), session:LF.session,
+    tradeType:LF.tradeType, screenshot:pendingShot,
+    status:'queued', review:null
+  });
+  persist();
+  LF={dir:'long',entry:'',exit:'',size:'',sl:'',tp:'',session:'',tradeType:'',notes:''};
+  pendingShot=null;
+  render();
+}
+
+// ════════════════════════════════════════════════════════════════
+//  TRADE CARD (shared)
+// ════════════════════════════════════════════════════════════════
+function tradeCard(t, clickable=true) {
+  const pTxt=pnlStr(t.pnl), pCls=pnlCls2(t.pnl);
+  const ico=t.direction==='long'?'ti-trending-up':'ti-trending-down';
+  const tpCls=typeChipCls(t.tradeType);
+  return `<div class="tc"${clickable?` onclick="openDetail('${t.id}')"`:''}>
+    <div class="tc-top">
+      <div class="tc-left">
+        <div class="tc-ico ${t.direction}"><i class="ti ${ico}"></i></div>
+        <div>
+          <div class="tc-nm">MNQ${t.session?` · ${H(t.session)}`:''}</div>
+          <div class="tc-dt">${fmt(t.ts)}</div>
+        </div>
+      </div>
+      <div style="text-align:right">
+        <div class="tc-pnl ${pCls}">${pTxt}</div>
+        ${t.plannedRR?`<div style="margin-top:3px"><span class="rrb ${rrCls(t.plannedRR)}">${rrLabel(t.plannedRR)}</span></div>`:''}
+      </div>
+    </div>
+    <div class="tc-row">
+      <span class="ch ch-${t.direction}">${t.direction}</span>
+      ${t.tradeType?`<span class="ch ${tpCls}">${H(t.tradeType)}</span>`:''}
+      <span class="mv">${t.entry}</span><span class="sep">→</span><span class="mv">${t.exit}</span>
+      <span class="sep">·</span><span class="mv">${t.size}c</span>
+      ${t.status==='queued'?'<span class="ch ch-warn" style="margin-left:auto">PENDING REVIEW</span>':''}
+      ${t.status==='approved'?`<span class="ch ch-muted" style="margin-left:auto"><i class="ti ti-check" style="font-size:10px"></i> REVIEWED</span>`:''}
+    </div>
+    ${t.screenshot?`<img class="tc-thumb" src="${t.screenshot}" onclick="event.stopPropagation();openLightbox('${t.id}')" title="Click to enlarge">`:''}
+  </div>`;
+}
+
+// ════════════════════════════════════════════════════════════════
+//  TRADE DETAIL MODAL
+// ════════════════════════════════════════════════════════════════
+function openDetail(id) {
+  const t = S.trades.find(x=>x.id===id); if (!t) return;
+  const pTxt=pnlStr(t.pnl), pCls=pnlCls2(t.pnl);
+  const rr=calcRR(t.entry,t.sl,t.tp,t.direction);
+  const actualRR = t.pnl!=null&&t.sl!=null ? calcRR(t.entry,t.exit,t.tp,t.direction) : null;
+  // Actual RR based on exit vs sl
+  let actRRtxt = '—';
+  if (t.sl!=null&&t.entry!=null) {
+    const risk=t.direction==='long'?Math.abs(t.entry-t.sl):Math.abs(t.sl-t.entry);
+    const rwd=t.pnl!=null?Math.abs(t.pnl/(t.size*2)):0; // per-contract tick value
+    if (risk>0) {
+      const actPts=t.direction==='long'?Math.abs(t.exit-t.entry):Math.abs(t.entry-t.exit);
+      const slPts=t.direction==='long'?Math.abs(t.entry-t.sl):Math.abs(t.sl-t.entry);
+      if (slPts>0) actRRtxt=`1:${(actPts/slPts).toFixed(2)}`;
+    }
+  }
+  const r=t.review||{};
+  document.getElementById('modal-root').innerHTML = `
+  <div class="modal-overlay" onclick="if(event.target===this)closeModal()">
+    <div class="modal">
+      <div class="modal-hd">
+        <div>
+          <div class="modal-title">Trade Detail — MNQ</div>
+          <div style="font-size:11px;color:var(--t2);margin-top:2px;font-family:var(--fm)">${fmt(t.ts)}</div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          ${t.status==='queued'?`<button class="btn btn-sm btn-primary" onclick="closeModal();setTab('queue')"><i class="ti ti-pencil"></i> Review</button>`:''}
+          <button class="btn-icon btn btn-ghost" onclick="closeModal()"><i class="ti ti-x"></i></button>
+        </div>
+      </div>
+      <div class="modal-bd">
+
+        <!-- Trade Data -->
+        <div class="sec-hd2"><i class="ti ti-chart-candle"></i> Trade Data</div>
+        <div class="det-grid">
+          <div class="det-cell"><div class="det-lbl">Direction</div><div class="det-val"><span class="ch ch-${t.direction}">${t.direction}</span></div></div>
+          <div class="det-cell"><div class="det-lbl">P&L</div><div class="det-val ${pCls}">${pTxt}</div></div>
+          <div class="det-cell"><div class="det-lbl">Entry</div><div class="det-val">${t.entry}</div></div>
+          <div class="det-cell"><div class="det-lbl">Exit</div><div class="det-val">${t.exit}</div></div>
+          <div class="det-cell"><div class="det-lbl">Stop Loss</div><div class="det-val">${t.sl||'—'}</div></div>
+          <div class="det-cell"><div class="det-lbl">Take Profit</div><div class="det-val">${t.tp||'—'}</div></div>
+          <div class="det-cell"><div class="det-lbl">Position Size</div><div class="det-val">${t.size} contract${t.size!==1?'s':''}</div></div>
+          <div class="det-cell"><div class="det-lbl">Session</div><div class="det-val">${H(t.session||'—')}</div></div>
+          <div class="det-cell"><div class="det-lbl">Trade Type</div><div class="det-val">${t.tradeType?`<span class="ch ${typeChipCls(t.tradeType)}">${H(t.tradeType)}</span>`:'—'}</div></div>
+          <div class="det-cell"><div class="det-lbl">Status</div><div class="det-val">${t.status==='approved'?'<span class="ch ch-live">APPROVED</span>':'<span class="ch ch-warn">PENDING</span>'}</div></div>
+          <div class="det-cell"><div class="det-lbl">Planned RR</div><div class="det-val"><span class="rrb ${rrCls(t.plannedRR)}">${rrLabel(t.plannedRR)}</span></div></div>
+          <div class="det-cell"><div class="det-lbl">Actual RR</div><div class="det-val"><span class="rrb ${rrCls(parseFloat(actRRtxt.replace('1:',''))||0)}">${actRRtxt}</span></div></div>
+        </div>
+        ${t.notes?`<div class="ref-box"><div class="ref-q">Notes</div><div class="ref-a">${H(t.notes)}</div></div>`:''}
+
+        <!-- Screenshot -->
+        ${t.screenshot?`
+        <div class="sec-hd2"><i class="ti ti-photo"></i> Chart Screenshot</div>
+        <img class="shot-full" src="${t.screenshot}" onclick="openLightbox('${t.id}')" title="Click to enlarge">
+        `:''}
+
+        <!-- Review Data -->
+        ${t.status==='approved'?`
+        <div class="sec-hd2"><i class="ti ti-brain"></i> Review Data</div>
+        ${(r.mistakes||[]).length?`<div class="ref-box"><div class="ref-q">Mistakes / Observations</div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px">${(r.mistakes||[]).map(m=>`<span class="mc">${H(m)}</span>`).join('')}</div></div>`:''}
+        ${(r.emotions||[]).length?`<div class="ref-box"><div class="ref-q">Emotional State</div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px">${(r.emotions||[]).map(e=>`<span class="ch ch-muted">${H(e)}</span>`).join('')}</div></div>`:''}
+        ${(r.improvements||[]).length?`<div class="ref-box"><div class="ref-q">Improvement Actions</div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px">${(r.improvements||[]).map(m=>`<span style="background:var(--cyb);color:var(--cy2);border:1px solid var(--cyd);padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600">${H(m)}</span>`).join('')}</div></div>`:''}
+        ${r.problem?`<div class="ref-box"><div class="ref-q">${isWin(t)?'What could have been better?':'Main Problem'}</div><div class="ref-a">${H(r.problem)}</div></div>`:''}
+        ${r.shouldhave?`<div class="ref-box"><div class="ref-q">${isWin(t)?'What was left on the table?':'What should have been done instead?'}</div><div class="ref-a">${H(r.shouldhave)}</div></div>`:''}
+        ${r.warning?`<div class="ref-box"><div class="ref-q">${isWin(t)?'Execution notes':'Warning signs before entry'}</div><div class="ref-a">${H(r.warning)}</div></div>`:''}
+        ${r.retake?`<div class="ref-box"><div class="ref-q">Would take again?</div><div class="ref-a" style="font-weight:600;color:${r.retake==='yes'?'var(--cg2)':r.retake==='no'?'var(--ls2)':'var(--cy2)'}">${r.retake.toUpperCase()}</div></div>`:''}
+        `:`<div class="alert al-warn" style="margin-top:12px"><i class="ti ti-clock"></i> This trade has not been reviewed yet.</div>`}
+      </div>
+    </div>
+  </div>`;
+}
+function closeModal() { document.getElementById('modal-root').innerHTML=''; }
+function openLightbox(id) {
+  const t=S.trades.find(x=>x.id===id); if (!t||!t.screenshot) return;
+  document.getElementById('modal-root').innerHTML+=`<div class="lightbox" onclick="this.remove()"><img src="${t.screenshot}" alt="Chart screenshot"></div>`;
+}
+
+// ════════════════════════════════════════════════════════════════
+//  REVIEW QUEUE — CHIP TOGGLE FIX INCLUDED
+// ════════════════════════════════════════════════════════════════
+function renderQueue() {
+  const q = queuedTrades();
+  if (!q.length) return `<div class="empty">
+    <div class="empty-ico"><i class="ti ti-checks"></i></div>
+    <h3>Review queue is clear</h3>
+    <p>All trades reviewed. Log new trades to continue tracking your discipline.</p>
+  </div>`;
+  return `
+  <div class="alert al-warn"><i class="ti ti-alert-triangle"></i>
+    All required fields must be completed before a trade can be approved.
+  </div>
+  <div class="sec-hd">
+    <span class="sec-tt">Pending Review <span style="color:var(--cy2);font-family:var(--fm)">(${q.length})</span></span>
+  </div>
+  ${q.map(qItem).join('')}`;
+}
+
+function qItem(t) {
+  const open = S.openReview === t.id;
+  const pTxt=pnlStr(t.pnl), pCls=pnlCls2(t.pnl);
+  const ico=t.direction==='long'?'ti-trending-up':'ti-trending-down';
+  const win=isWin(t);
+  const D = (S.draft&&S.draft.id===t.id) ? S.draft
+    : {id:t.id,mistakes:[],improvements:[],emotions:[],retake:'',problem:'',shouldhave:'',warning:''};
+  const {ok,msg}=checkDraft(D);
+  const mistakeList = win ? S.mistakes : [...new Set([...S.mistakes,...DEF.mistakes.slice(-5)])];
+  const improvList  = win
+    ? ['Execution was optimal','Good entry timing','Good exit timing','Position sized correctly','Plan followed perfectly','Could hold longer','Could size up','Other']
+    : S.improvements;
+  const prompts = win ? {
+    p1:'What could have been better?', ph1:'e.g. Could have held longer, entry timing slightly off, size too small…',
+    p2:'Did you leave profits on the table?', ph2:'e.g. Exit was too early, failed to trail stop, missed second entry…',
+    p3:'What made this trade successful?', ph3:'e.g. Followed the plan, waited for confirmation, clean execution…',
+  } : {
+    p1:'What was the main cause of this loss?', ph1:'e.g. Entered too early, chased a breakout, emotional entry after previous loss…',
+    p2:'What should have been done instead?', ph2:'e.g. Wait for reclaim confirmation, reduce risk, skip low-quality setup…',
+    p3:'What warning signs existed BEFORE entry?', ph3:'e.g. Weak momentum, volume slowing, HTF resistance nearby, spread widening…',
+  };
+
+  return `<div class="tc" id="qi-${t.id}" style="cursor:default">
+    <div class="tc-top" style="cursor:default">
+      <div class="tc-left">
+        <div class="tc-ico ${t.direction}"><i class="ti ${ico}"></i></div>
+        <div>
+          <div class="tc-nm">MNQ${t.session?` · ${H(t.session)}`:''}</div>
+          <div class="tc-dt">${fmt(t.ts)}</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:9px">
+        <div style="text-align:right">
+          <div class="tc-pnl ${pCls}">${pTxt}</div>
+          ${t.plannedRR?`<div style="margin-top:3px"><span class="rrb ${rrCls(t.plannedRR)}">${rrLabel(t.plannedRR)}</span></div>`:''}
+        </div>
+        <button class="xbtn" onclick="toggleQ('${t.id}')">
+          <i class="ti ti-chevron-${open?'up':'down'}"></i>${open?'Collapse':'Review'}
+        </button>
+      </div>
+    </div>
+    <div class="tc-row">
+      <span class="ch ch-${t.direction}">${t.direction}</span>
+      ${t.tradeType?`<span class="ch ${typeChipCls(t.tradeType)}">${H(t.tradeType)}</span>`:''}
+      <span class="mv">${t.entry}</span><span class="sep">→</span><span class="mv">${t.exit}</span>
+      <span class="sep">·</span><span class="mv">${t.size}c</span>
+    </div>
+    ${t.screenshot?`<img class="tc-thumb" src="${t.screenshot}" onclick="openLightbox('${t.id}')" title="Click to enlarge">`:''}
+
+    ${open?`<div class="rev-panel">
+      <div class="ctx-banner ${win?'win-ctx':'loss-ctx'}">
+        <i class="ti ti-${win?'trending-up':'trending-down'}"></i>
+        ${win?'WIN TRADE — Focus: Optimisation &amp; Refinement':'LOSS TRADE — Focus: Mistake Analysis &amp; Correction'}
+      </div>
+
+      <!-- STEP 1: Mistakes -->
+      <div class="rev-step">
+        <div class="rs-top">
+          <span class="rs-lft"><i class="ti ti-alert-circle" style="color:var(--cy2)"></i>${win?'What could improve?':'Mistakes made'}</span>
+          <span id="b1-${t.id}" class="${D.mistakes.length?'badge-ok':'badge-req'}">${D.mistakes.length?'✓ DONE':'REQUIRED'}</span>
+        </div>
+        <div class="pill-wrap">
+          ${mistakeList.map(m=>`<div class="pill pm${D.mistakes.includes(m)?' on':''}" data-tid="${t.id}" data-fld="mistakes" data-v="${encodeURIComponent(m)}" onclick="togglePill(this)">${H(m)}</div>`).join('')}
+        </div>
+      </div>
+
+      <!-- STEP 2: Emotions -->
+      <div class="rev-step">
+        <div class="rs-top">
+          <span class="rs-lft"><i class="ti ti-brain" style="color:var(--cp2)"></i>Emotional State</span>
+          <span class="${D.emotions.length?'badge-ok':'badge-opt'}">${D.emotions.length?'✓ DONE':'OPTIONAL'}</span>
+        </div>
+        <div class="pill-wrap">
+          ${S.emotions.map(e=>`<div class="pill pe${D.emotions.includes(e)?' on':''}" data-tid="${t.id}" data-fld="emotions" data-v="${encodeURIComponent(e)}" onclick="togglePill(this)">${H(e)}</div>`).join('')}
+        </div>
+      </div>
+
+      <!-- STEP 3: Actions -->
+      <div class="rev-step">
+        <div class="rs-top">
+          <span class="rs-lft"><i class="ti ti-bulb" style="color:var(--cy2)"></i>${win?'What to keep / replicate':'Improvement Actions'}</span>
+          <span id="b3-${t.id}" class="${D.improvements.length?'badge-ok':'badge-req'}">${D.improvements.length?'✓ DONE':'REQUIRED'}</span>
+        </div>
+        <div class="pill-wrap">
+          ${improvList.map(m=>`<div class="pill ${win?'pw':'pa'}${D.improvements.includes(m)?' on':''}" data-tid="${t.id}" data-fld="improvements" data-v="${encodeURIComponent(m)}" onclick="togglePill(this)">${H(m)}</div>`).join('')}
+        </div>
+      </div>
+
+      <!-- STEP 4: Reflections -->
+      <div class="rev-step">
+        <div class="rs-top">
+          <span class="rs-lft"><i class="ti ti-writing" style="color:var(--t1)"></i>Written Reflection</span>
+          <span id="b4-${t.id}" class="${(D.problem.trim().length>=8&&D.shouldhave.trim().length>=8&&D.warning.trim().length>=8)?'badge-ok':'badge-req'}">${(D.problem.trim().length>=8&&D.shouldhave.trim().length>=8&&D.warning.trim().length>=8)?'✓ DONE':'REQUIRED — all 3 fields'}</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div class="fg"><div class="lbl">${prompts.p1}<span class="req-star">*</span></div>
+            <textarea style="min-height:82px" placeholder="${prompts.ph1}" oninput="draftTxt('${t.id}','problem',this.value)">${H(D.problem)}</textarea>
+          </div>
+          <div class="fg"><div class="lbl">${prompts.p2}<span class="req-star">*</span></div>
+            <textarea style="min-height:82px" placeholder="${prompts.ph2}" oninput="draftTxt('${t.id}','shouldhave',this.value)">${H(D.shouldhave)}</textarea>
+          </div>
+          <div class="fg"><div class="lbl">${prompts.p3}<span class="req-star">*</span></div>
+            <textarea style="min-height:82px" placeholder="${prompts.ph3}" oninput="draftTxt('${t.id}','warning',this.value)">${H(D.warning)}</textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 5: Retake -->
+      <div class="rev-step">
+        <div class="rs-top">
+          <span class="rs-lft"><i class="ti ti-repeat" style="color:var(--t1)"></i>Would you take this trade again?</span>
+          <span id="b5-${t.id}" class="${D.retake?'badge-ok':'badge-req'}">${D.retake?'✓ DONE':'REQUIRED'}</span>
+        </div>
+        <div class="rtk-row">
+          <div class="rtk${D.retake==='yes'?' ry':''}" onclick="draftRetake('${t.id}','yes')">Yes</div>
+          <div class="rtk${D.retake==='no'?' rn':''}" onclick="draftRetake('${t.id}','no')">No</div>
+          <div class="rtk${D.retake==='maybe'?' rm':''}" onclick="draftRetake('${t.id}','maybe')">Maybe</div>
+        </div>
+      </div>
+
+      <div class="rev-footer">
+        <div class="rev-st${ok?' ok':''}" id="rst-${t.id}">
+          <i class="ti ti-${ok?'circle-check':'lock'}"></i>${ok?'Ready to approve':msg}
+        </div>
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-del btn-sm" onclick="deleteTrade('${t.id}')"><i class="ti ti-trash"></i> Delete</button>
+          <button class="btn btn-approve" id="apb-${t.id}" ${!ok?'disabled':''} onclick="approveTrade('${t.id}')"><i class="ti ti-circle-check"></i> Approve Trade</button>
+        </div>
+      </div>
+    </div>`:''}
+  </div>`;
+}
+
+// VALIDATION
+function checkDraft(D) {
+  const issues=[];
+  if (!D.mistakes.length)                           issues.push('select at least one observation');
+  if (!D.improvements.length)                       issues.push('select at least one action');
+  if (!D.problem||D.problem.trim().length<8)        issues.push('fill in reflection 1 (8+ chars)');
+  if (!D.shouldhave||D.shouldhave.trim().length<8)  issues.push('fill in reflection 2');
+  if (!D.warning||D.warning.trim().length<8)        issues.push('fill in reflection 3');
+  if (!D.retake)                                     issues.push('answer the retake question');
+  return {ok:issues.length===0, msg:issues[0]||''};
+}
+
+function ensureDraft(tid) {
+  if (!S.draft||S.draft.id!==tid) {
+    S.draft={id:tid,mistakes:[],improvements:[],emotions:[],retake:'',problem:'',shouldhave:'',warning:''};
+  }
+}
+
+// THE FIXED PILL TOGGLE — Pure div, data attributes, no label/input double-fire
+function togglePill(el) {
+  const tid=el.dataset.tid, fld=el.dataset.fld, val=decodeURIComponent(el.dataset.v);
+  ensureDraft(tid);
+  const arr=S.draft[fld];
+  const idx=arr.indexOf(val);
+  if (idx>=0) arr.splice(idx,1); else arr.push(val);
+  el.classList.toggle('on');
+  refreshDraftUI(tid);
+}
+function draftRetake(tid, v) {
+  ensureDraft(tid);
+  S.draft.retake=v;
+  document.querySelectorAll(`#qi-${tid} .rtk`).forEach(b=>{
+    b.className='rtk'+(b.textContent.trim().toLowerCase()===v?(' r'+v[0]):'');
+  });
+  refreshDraftUI(tid);
+}
+function draftTxt(tid, fld, v) {
+  ensureDraft(tid);
+  S.draft[fld]=v;
+  refreshDraftUI(tid);
+}
+function refreshDraftUI(tid) {
+  if (!S.draft||S.draft.id!==tid) return;
+  const D=S.draft;
+  const {ok,msg}=checkDraft(D);
+  const setB=(id,cond,req='REQUIRED')=>{const el=document.getElementById(id);if(!el)return;el.className=cond?'badge-ok':'badge-req';el.textContent=cond?'✓ DONE':req};
+  setB(`b1-${tid}`,D.mistakes.length>0);
+  setB(`b3-${tid}`,D.improvements.length>0);
+  setB(`b4-${tid}`,D.problem.trim().length>=8&&D.shouldhave.trim().length>=8&&D.warning.trim().length>=8,'REQUIRED — all 3 fields');
+  setB(`b5-${tid}`,!!D.retake);
+  const st=document.getElementById(`rst-${tid}`);
+  if(st){st.className='rev-st'+(ok?' ok':'');st.innerHTML=`<i class="ti ti-${ok?'circle-check':'lock'}"></i>${ok?'Ready to approve':msg}`}
+  const ab=document.getElementById(`apb-${tid}`);
+  if(ab) ab.disabled=!ok;
+}
+function toggleQ(id) {
+  S.openReview=S.openReview===id?null:id;
+  if (S.openReview===id) ensureDraft(id);
+  render();
+}
+function approveTrade(id) {
+  const t=S.trades.find(x=>x.id===id); if(!t) return;
+  ensureDraft(id);
+  const {ok}=checkDraft(S.draft);
+  if (!ok) {alert('Please complete all required review fields.');return;}
+  t.status='approved';
+  t.review={
+    mistakes:S.draft.mistakes.slice(), improvements:S.draft.improvements.slice(),
+    emotions:S.draft.emotions.slice(), retake:S.draft.retake,
+    problem:S.draft.problem, shouldhave:S.draft.shouldhave, warning:S.draft.warning,
+  };
+  t.approvedAt=Date.now();
+  S.draft=null; S.openReview=null;
+  persist(); render();
+}
+function deleteTrade(id) {
+  if (!confirm('Delete this trade? Cannot be undone.')) return;
+  S.trades=S.trades.filter(x=>x.id!==id);
+  persist(); render();
+}
+
+// ════════════════════════════════════════════════════════════════
+//  TRADE HISTORY
+// ════════════════════════════════════════════════════════════════
+function renderHistory() {
+  const all = [...S.trades].sort((a,b)=>b.ts-a.ts);
+  if (!all.length) return `<div class="empty">
+    <div class="empty-ico"><i class="ti ti-list-details"></i></div>
+    <h3>No trades yet</h3><p>Log your first trade to get started.</p>
+    <button class="btn btn-primary" onclick="setTab('log')"><i class="ti ti-plus"></i> Log Trade</button>
+  </div>`;
+  return `
+  <div class="sec-hd">
+    <span class="sec-tt">All Trades <span style="font-weight:400;color:var(--t2);font-size:12px">(${all.length})</span></span>
+    <span style="font-size:11px;color:var(--t2)">Click any trade to view full detail</span>
+  </div>
+  ${all.map(t=>tradeCard(t,true)).join('')}`;
+}
+
+// ════════════════════════════════════════════════════════════════
+//  PER-TRADE-TYPE ANALYTICS TABLES
+// ════════════════════════════════════════════════════════════════
+function statsFor(arr) {
+  if (!arr.length) return null;
+  const wins=arr.filter(t=>t.pnl>0), losses=arr.filter(t=>t.pnl<=0);
+  const wr=(wins.length/arr.length*100).toFixed(1);
+  const total=arr.reduce((s,t)=>s+(t.pnl||0),0);
+  const avgW=wins.length?wins.reduce((s,t)=>s+t.pnl,0)/wins.length:0;
+  const avgL=losses.length?Math.abs(losses.reduce((s,t)=>s+t.pnl,0)/losses.length):0;
+  const actRR=avgL>0?(avgW/avgL).toFixed(2):'—';
+  const prrs=arr.filter(t=>t.plannedRR).map(t=>t.plannedRR);
+  const avgPRR=prrs.length?(prrs.reduce((a,b)=>a+b,0)/prrs.length).toFixed(2):'—';
+  const clean=arr.filter(t=>(t.review?.mistakes||[]).some(m=>m.toLowerCase().includes('clean'))).length;
+  return { count:arr.length, wins:wins.length, losses:losses.length, wr, total, avgW, avgL, actRR, avgPRR, clean };
+}
+
+function tradeTypeTables(trades) {
+  // Group trades by tradeType (untyped trades fall under "Live Executed" for continuity)
+  const groups = {};
+  trades.forEach(t=>{
+    const key = t.tradeType || 'Live Executed';
+    if (!groups[key]) groups[key]=[];
+    groups[key].push(t);
+  });
+
+  // Preserve user-defined order from settings, then any extra keys found in data
+  const orderedTypes = [...S.tradeTypes, ...Object.keys(groups).filter(k=>!S.tradeTypes.includes(k))];
+  const present = orderedTypes.filter(k=>groups[k]&&groups[k].length);
+
+  if (!present.length) return '';
+
+  const iconFor = tp => tp==='Simulated'?'ti-flask':tp==='Missed Trade'?'ti-eye-off':'ti-bolt';
+  const ciFor   = tp => tp==='Simulated'?'ci-y':tp==='Missed Trade'?'ci-p':'ci-g';
+
+  return `
+  <div class="sec-lb"><i class="ti ti-table"></i> Analytics By Trade Type</div>
+  <div class="two-col" style="margin-bottom:10px;flex-wrap:wrap">
+    ${present.map(tp=>{
+      const arr=groups[tp];
+      const s=statsFor(arr);
+      return `
+      <div class="col" style="min-width:240px;flex:1 1 240px;margin-bottom:10px">
+        <div class="card" style="margin-bottom:0;height:100%">
+          <div class="card-hd">
+            <div class="card-hl">
+              <div class="cico ${ciFor(tp)}"><i class="ti ${iconFor(tp)}"></i></div>
+              <div><div class="ct">${H(tp)}</div><div class="cs">${s.count} trade${s.count!==1?'s':''}</div></div>
+            </div>
+            ${tp==='Missed Trade'?'':`<span class="ch ${parseFloat(s.wr)>=50?'ch-long':'ch-short'}">${s.wr}% WR</span>`}
+          </div>
+          <div class="card-bd">
+            <div style="display:flex;flex-direction:column;gap:8px">
+              ${tp==='Missed Trade'?`
+              <div style="display:flex;justify-content:space-between;font-size:12px">
+                <span style="color:var(--t1)">Setups Missed</span>
+                <span style="font-family:var(--fm);color:var(--t0)">${s.count}</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:12px">
+                <span style="color:var(--t1)">Avg Planned RR</span>
+                <span style="font-family:var(--fm);color:var(--t0)">${s.avgPRR}</span>
+              </div>
+              `:`
+              <div style="display:flex;justify-content:space-between;font-size:12px">
+                <span style="color:var(--t1)">Win Rate</span>
+                <span style="font-family:var(--fm);font-weight:600;color:${parseFloat(s.wr)>=50?'var(--cg2)':'var(--ls2)'}">${s.wr}% (${s.wins}W / ${s.losses}L)</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:12px">
+                <span style="color:var(--t1)">Total P&L</span>
+                <span style="font-family:var(--fm);font-weight:600;color:${s.total>=0?'var(--cg2)':'var(--ls2)'}">${s.total>=0?'+':''}${s.total.toFixed(2)}</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:12px">
+                <span style="color:var(--t1)">Avg Win / Avg Loss</span>
+                <span style="font-family:var(--fm);color:var(--t0)"><span style="color:var(--cg2)">+${s.avgW.toFixed(2)}</span> / <span style="color:var(--ls2)">-${s.avgL.toFixed(2)}</span></span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:12px">
+                <span style="color:var(--t1)">Actual RR</span>
+                <span style="font-family:var(--fm);color:var(--t0)">${s.actRR}</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:12px">
+                <span style="color:var(--t1)">Planned RR (avg)</span>
+                <span style="font-family:var(--fm);color:var(--t0)">${s.avgPRR}</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:12px">
+                <span style="color:var(--t1)">Clean Trades</span>
+                <span style="font-family:var(--fm);color:var(--t0)">${s.clean} (${Math.round(s.clean/s.count*100)}%)</span>
+              </div>
+              `}
+            </div>
+          </div>
+        </div>
+      </div>`;
+    }).join('')}
+  </div>`;
+}
+
+// ════════════════════════════════════════════════════════════════
+//  ANALYTICS
+// ════════════════════════════════════════════════════════════════
+function renderAnalytics() {
+  const trades=approvedTrades();
+  if (!trades.length) return `<div class="empty">
+    <div class="empty-ico"><i class="ti ti-chart-bar"></i></div>
+    <h3>No data yet</h3><p>Approve trades in the Review Queue to see analytics.</p>
+    <button class="btn btn-primary" onclick="setTab('queue')"><i class="ti ti-arrow-right"></i> Go to Queue</button>
+  </div>`;
+  const wins=trades.filter(t=>t.pnl>0), losses=trades.filter(t=>t.pnl<=0);
+  const wr=(wins.length/trades.length*100).toFixed(1);
+  const total=trades.reduce((s,t)=>s+(t.pnl||0),0);
+  const avgW=wins.length?wins.reduce((s,t)=>s+t.pnl,0)/wins.length:0;
+  const avgL=losses.length?Math.abs(losses.reduce((s,t)=>s+t.pnl,0)/losses.length):0;
+  const actRR=avgL>0?(avgW/avgL).toFixed(2):'—';
+  const prrs=trades.filter(t=>t.plannedRR).map(t=>t.plannedRR);
+  const avgPRR=prrs.length?(prrs.reduce((a,b)=>a+b,0)/prrs.length).toFixed(2):'—';
+  const viol=trades.filter(t=>(t.review?.mistakes||[]).some(m=>!m.toLowerCase().includes('clean')&&m!=='Other')).length;
+  const clean=trades.filter(t=>(t.review?.mistakes||[]).some(m=>m.toLowerCase().includes('clean'))).length;
+
+  // Counts
+  const mC={},eC={},sC={},tC={};
+  trades.forEach(t=>{
+    (t.review?.mistakes||[]).forEach(m=>{if(!m.toLowerCase().includes('clean'))mC[m]=(mC[m]||0)+1});
+    (t.review?.emotions||[]).forEach(e=>{eC[e]=(eC[e]||0)+1});
+    if(t.session)sC[t.session]=(sC[t.session]||0)+1;
+    if(t.tradeType)tC[t.tradeType]=(tC[t.tradeType]||0)+1;
+  });
+  const topM=Object.entries(mC).sort((a,b)=>b[1]-a[1]).slice(0,7);
+  const topE=Object.entries(eC).sort((a,b)=>b[1]-a[1]).slice(0,6);
+  const maxM=topM[0]?.[1]||1, maxE=topE[0]?.[1]||1;
+
+  // Trade type breakdown
+  const live=trades.filter(t=>t.tradeType==='Live Executed'||!t.tradeType);
+  const sim=trades.filter(t=>t.tradeType==='Simulated');
+  const miss=trades.filter(t=>t.tradeType==='Missed Trade');
+  const liveWR=live.length?(live.filter(t=>t.pnl>0).length/live.length*100).toFixed(0):'—';
+  const simWR=sim.length?(sim.filter(t=>t.pnl>0).length/sim.length*100).toFixed(0):'—';
+
+  return `
+  <div class="stats-row">
+    <div class="stat sn"><div class="s-lb">Trades</div><div class="s-vl">${trades.length}</div></div>
+    <div class="stat ${parseFloat(wr)>=50?'sg':'sr'}"><div class="s-lb">Win Rate</div><div class="s-vl">${wr}%</div></div>
+    <div class="stat ${total>=0?'sg':'sr'}"><div class="s-lb">Total P&L</div><div class="s-vl">${total>=0?'+':''}${total.toFixed(2)}</div></div>
+    <div class="stat sy"><div class="s-lb">Actual RR</div><div class="s-vl">${actRR}</div></div>
+    <div class="stat sy"><div class="s-lb">Planned RR</div><div class="s-vl">${avgPRR}</div><div class="s-su">avg of ${prrs.length}</div></div>
+    <div class="stat sr"><div class="s-lb">Violations</div><div class="s-vl">${viol}</div><div class="s-su">of ${trades.length}</div></div>
+    <div class="stat sg"><div class="s-lb">Clean</div><div class="s-vl">${clean}</div><div class="s-su">${trades.length?Math.round(clean/trades.length*100):0}%</div></div>
+  </div>
+
+  <!-- Trade type breakdown -->
+  <div class="card">
+    <div class="card-hd"><div class="card-hl"><div class="cico ci-b"><i class="ti ti-layers-intersect"></i></div><div class="ct">Trade Type Breakdown</div></div></div>
+    <div class="card-bd">
+      <div class="two-col">
+        <div class="col">
+          ${[['Live Executed',live,liveWR,'ci-g'],['Simulated',sim,simWR,'ci-y'],['Missed Trade',miss,'—','ci-p']].map(([nm,arr,wr2,ci])=>arr.length?`
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--b0)">
+            <span style="font-size:12px;color:var(--t0);font-weight:600">${nm}</span>
+            <div style="display:flex;align-items:center;gap:8px">
+              <span style="font-size:11px;color:var(--t2);font-family:var(--fm)">${arr.length} trades</span>
+              ${wr2!=='—'?`<span style="font-size:11px;font-weight:600;color:${parseFloat(wr2)>=50?'var(--cg2)':'var(--ls2)'};">${wr2}% WR</span>`:''}
+            </div>
+          </div>`:'').join('')}
+        </div>
+        <div class="col">
+          <div style="font-size:11px;color:var(--t2);margin-bottom:8px;font-weight:600;text-transform:uppercase;letter-spacing:.06em">Execution Gap Analysis</div>
+          ${live.length&&sim.length?`
+          <div class="ref-box">
+            <div class="ref-q">Live vs Simulated Win Rate</div>
+            <div class="ref-a">Live: <strong style="color:${parseFloat(liveWR)>=50?'var(--cg2)':'var(--ls2)'}">${liveWR}%</strong> vs Sim: <strong style="color:${parseFloat(simWR)>=50?'var(--cg2)':'var(--ls2)'}">${simWR}%</strong>
+            ${parseFloat(simWR)>parseFloat(liveWR)+15?'<br><span style="color:var(--cy2);font-size:11px">⚠ Large gap — possible execution/confidence issue</span>':''}</div>
+          </div>`:`<div style="color:var(--t2);font-size:12px">Log both Live and Simulated trades to see execution gap analysis.</div>`}
+          ${miss.length?`<div class="ref-box" style="margin-top:8px"><div class="ref-q">Missed Trades</div><div class="ref-a">${miss.length} missed setup${miss.length!==1?'s':''} logged. Review them to identify missed opportunities.</div></div>`:''}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Per-trade-type analytics tables -->
+  ${tradeTypeTables(trades)}
+
+  <div class="two-col" style="margin-bottom:10px">
+    <div class="col">
+      <div class="card">
+        <div class="card-hd"><div class="card-hl"><div class="cico ci-r"><i class="ti ti-alert-circle"></i></div><div class="ct">Mistake Frequency</div></div></div>
+        <div class="card-bd">
+          ${topM.length?topM.map(([m,c])=>`<div class="bar-row"><div class="bar-lbl" title="${H(m)}">${H(m)}</div><div class="bar-track"><div class="bar-fill" style="width:${Math.round(c/maxM*100)}%"></div></div><div class="bar-ct">${c}</div></div>`).join(''):`<div style="color:var(--t2);font-size:12px">No mistake data yet.</div>`}
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-hd"><div class="card-hl"><div class="cico ci-p"><i class="ti ti-brain"></i></div><div class="ct">Emotional States</div></div></div>
+        <div class="card-bd">
+          ${topE.length?topE.map(([e,c])=>`<div class="bar-row"><div class="bar-lbl">${H(e)}</div><div class="bar-track"><div class="bar-fill y" style="width:${Math.round(c/maxE*100)}%"></div></div><div class="bar-ct">${c}</div></div>`).join(''):`<div style="color:var(--t2);font-size:12px">No emotion data yet.</div>`}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="two-col" style="margin-bottom:10px">
+    <div class="col">
+      <div class="card">
+        <div class="card-hd"><div class="card-hl"><div class="cico ci-n"><i class="ti ti-repeat"></i></div><div class="ct">Retake Distribution</div></div></div>
+        <div class="card-bd">
+          ${['yes','no','maybe'].map(r=>{const cnt=trades.filter(t=>t.review?.retake===r).length;const pct=trades.length?Math.round(cnt/trades.length*100):0;const cl=r==='yes'?'var(--cg)':r==='no'?'var(--ls)':'var(--cy)';return`<div class="bar-row"><div class="bar-lbl" style="color:${cl};text-transform:capitalize">${r}</div><div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${cl}"></div></div><div class="bar-ct">${cnt}</div></div>`;}).join('')}
+          <div class="divider" style="margin:10px 0"></div>
+          <div style="display:flex;gap:16px;font-size:11px;color:var(--t1);font-family:var(--fm)">
+            <span>Avg win <span style="color:var(--cg2)">+${avgW.toFixed(2)}</span></span>
+            <span>Avg loss <span style="color:var(--ls2)">-${avgL.toFixed(2)}</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-hd"><div class="card-hl"><div class="cico ci-n"><i class="ti ti-clock"></i></div><div class="ct">Sessions</div></div></div>
+        <div class="card-bd">
+          ${Object.keys(sC).length?S.sessions.filter(s=>sC[s]).map(s=>{const c=sC[s];const pct=Math.round(c/trades.length*100);const wns=trades.filter(t=>t.session===s&&t.pnl>0).length;const wr3=c?Math.round(wns/c*100):0;return`<div class="bar-row"><div class="bar-lbl">${H(s)}</div><div class="bar-track"><div class="bar-fill g" style="width:${pct}%"></div></div><div class="bar-ct" style="color:${wr3>=50?'var(--cg2)':'var(--ls2)'}">${wr3}%</div></div>`;}).join(''):`<div style="color:var(--t2);font-size:12px">No session data yet.</div>`}
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ════════════════════════════════════════════════════════════════
+//  WEEKLY REVIEW
+// ════════════════════════════════════════════════════════════════
+function renderWeekly() {
+  const approved=approvedTrades();
+  if (!approved.length) return `<div class="empty">
+    <div class="empty-ico"><i class="ti ti-calendar-week"></i></div>
+    <h3>No approved trades yet</h3><p>Approve trades through the Review Queue to begin weekly analysis.</p>
+  </div>`;
+
+  const byWeek=groupBy(approved, t=>weekKey(t.ts));
+  const weeks=Object.entries(byWeek).sort((a,b)=>b[0].localeCompare(a[0]));
+
+  return `
+  <div class="alert al-info"><i class="ti ti-info-circle"></i>
+    Weekly review is where patterns emerge. Revisit your chart screenshots and reflections — this is the compound work.
+  </div>
+  ${weeks.map(([wk,wTrades])=>weekSection(wk,wTrades)).join('')}`;
+}
+
+function weekSection(wk, wTrades) {
+  const wd=S.weeklyDrafts[wk]||{answers:{},completed:false};
+  const wins=wTrades.filter(t=>t.pnl>0);
+  const total=wTrades.reduce((s,t)=>s+(t.pnl||0),0);
+  const wr=Math.round(wins.length/wTrades.length*100);
+  const mC={},eC={},sC={};
+  wTrades.forEach(t=>{
+    (t.review?.mistakes||[]).forEach(m=>{if(!m.toLowerCase().includes('clean'))mC[m]=(mC[m]||0)+1});
+    (t.review?.emotions||[]).forEach(e=>{eC[e]=(eC[e]||0)+1});
+    if(t.session)sC[t.session]=(sC[t.session]||0)+1;
+  });
+  const topMistake=Object.entries(mC).sort((a,b)=>b[1]-a[1])[0]?.[0]||'—';
+  const topEmo=Object.entries(eC).sort((a,b)=>b[1]-a[1])[0]?.[0]||'—';
+  const bestSess=Object.entries(sC).sort((a,b)=>b[1]-a[1])[0]?.[0]||'—';
+  const avgPRR=wTrades.filter(t=>t.plannedRR).length?(wTrades.filter(t=>t.plannedRR).reduce((s,t)=>s+t.plannedRR,0)/wTrades.filter(t=>t.plannedRR).length).toFixed(2):'—';
+  const answered=S.weeklyQs.filter((_,i)=>(wd.answers||{})[i]?.trim().length>4).length;
+  const allAnswered=answered===S.weeklyQs.length;
+
+  return `<div class="wk-section">
+    <div class="wk-banner">
+      <div>
+        <div class="wk-title">${fmtWk(wk)}</div>
+        <div class="wk-sub">${wTrades.length} trades · ${answered}/${S.weeklyQs.length} questions answered</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span class="${total>=0?'ch ch-live':'ch ch-err'}">${total>=0?'+':''}${total.toFixed(2)}</span>
+        <span class="${wr>=50?'ch ch-live':'ch ch-err'}">${wr}% WR</span>
+        ${allAnswered?'<span class="ch ch-live"><i class="ti ti-check" style="font-size:10px"></i> COMPLETE</span>':''}
+      </div>
+    </div>
+
+    <!-- Automatic insights -->
+    <div class="wk-insights">
+      <div class="wi"><div class="wi-lb">Trades</div><div class="wi-vl">${wTrades.length}</div></div>
+      <div class="wi"><div class="wi-lb">Win Rate</div><div class="wi-vl ${wr>=50?'g':'r'}">${wr}%</div></div>
+      <div class="wi"><div class="wi-lb">P&L</div><div class="wi-vl ${total>=0?'g':'r'}">${total>=0?'+':''}${total.toFixed(2)}</div></div>
+      <div class="wi"><div class="wi-lb">Avg RR</div><div class="wi-vl y">${avgPRR}</div></div>
+      <div class="wi"><div class="wi-lb">Top Mistake</div><div class="wi-vl" style="font-size:11px;color:var(--cy2)">${H(topMistake)}</div></div>
+      <div class="wi"><div class="wi-lb">Top Emotion</div><div class="wi-vl" style="font-size:11px;color:var(--cp2)">${H(topEmo)}</div></div>
+      <div class="wi"><div class="wi-lb">Best Session</div><div class="wi-vl y" style="font-size:13px">${H(bestSess)}</div></div>
+      <div class="wi"><div class="wi-lb">Review %</div><div class="wi-vl ${answered>=S.weeklyQs.length?'g':'y'}">${Math.round(answered/Math.max(S.weeklyQs.length,1)*100)}%</div></div>
+    </div>
+
+    <!-- Trades from this week -->
+    <div class="wk-trades-list">
+      <div style="font-size:10px;font-weight:600;color:var(--t2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">Trades This Week (click to view)</div>
+      ${wTrades.map(t=>{
+        const pTxt=pnlStr(t.pnl),pCls=pnlCls2(t.pnl);
+        return`<div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--ink2);border-radius:var(--r8);margin-bottom:6px;cursor:pointer;border:1px solid var(--b0);transition:border-color .12s" onclick="openDetail('${t.id}')" onmouseover="this.style.borderColor='var(--b2)'" onmouseout="this.style.borderColor='var(--b0)'">
+          <span class="ch ch-${t.direction}">${t.direction}</span>
+          <span style="font-family:var(--fm);font-size:12px;color:var(--t1)">${fmtDate(t.ts)}</span>
+          ${t.session?`<span style="font-size:11px;color:var(--t2)">${H(t.session)}</span>`:''}
+          <span class="tc-pnl ${pCls}" style="font-size:14px;margin-left:auto">${pTxt}</span>
+          ${t.screenshot?`<img style="width:40px;height:30px;border-radius:4px;object-fit:cover;border:1px solid var(--b1);flex-shrink:0" src="${t.screenshot}">`:''}
+        </div>`;
+      }).join('')}
+    </div>
+
+    <!-- Weekly questions -->
+    <div class="wk-qs">
+      <div style="font-size:10px;font-weight:600;color:var(--t2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px">Weekly Reflection Questions</div>
+      ${S.weeklyQs.map((q,i)=>`
+        <div style="margin-bottom:10px">
+          <div class="lbl">${i+1}. ${H(q)}</div>
+          <textarea style="min-height:60px;margin-top:5px" placeholder="Your answer…" oninput="saveWeeklyAnswer('${wk}',${i},this.value)">${H((wd.answers||{})[i]||'')}</textarea>
+        </div>`).join('')}
+    </div>
+  </div>`;
+}
+
+function saveWeeklyAnswer(wk, i, v) {
+  if (!S.weeklyDrafts[wk]) S.weeklyDrafts[wk]={answers:{},completed:false};
+  S.weeklyDrafts[wk].answers[i]=v;
+  persist();
+}
+
+// ════════════════════════════════════════════════════════════════
+//  SETTINGS — FULLY CUSTOMIZABLE
+// ════════════════════════════════════════════════════════════════
+function renderSettings() {
+  const tabs=[
+    {id:'mistakes',label:'Mistakes',ico:'ti-alert-circle'},
+    {id:'improvements',label:'Actions',ico:'ti-bulb'},
+    {id:'emotions',label:'Emotions',ico:'ti-brain'},
+    {id:'tradeTypes',label:'Trade Types',ico:'ti-layers-intersect'},
+    {id:'sessions',label:'Sessions',ico:'ti-clock'},
+    {id:'winQs',label:'Win Questions',ico:'ti-trending-up'},
+    {id:'lossQs',label:'Loss Questions',ico:'ti-trending-down'},
+    {id:'weeklyQs',label:'Weekly Questions',ico:'ti-calendar-week'},
+    {id:'data',label:'Data',ico:'ti-database'},
+  ];
+  const t=S.stab;
+  const listSection=(key,title,ico,ciCls,placeholder)=>`
+  <div class="card">
+    <div class="card-hd"><div class="card-hl"><div class="cico ${ciCls}"><i class="ti ${ico}"></i></div>
+      <div><div class="ct">${title}</div><div class="cs">Click × to remove</div></div></div></div>
+    <div class="card-bd">
+      <div class="te">${S[key].map((m,i)=>`<div class="te-tag"><span>${H(m)}</span><button onclick="removeItem('${key}',${i})">×</button></div>`).join('')}</div>
+      <div class="add-row">
+        <input id="ni-${key}" placeholder="Add new…" onkeydown="if(event.key==='Enter')addItem('${key}','${placeholder}')">
+        <button class="btn" onclick="addItem('${key}','${placeholder}')"><i class="ti ti-plus"></i> Add</button>
+      </div>
+    </div>
+  </div>`;
+  const questionSection=(key,title,ico,ciCls)=>`
+  <div class="card">
+    <div class="card-hd"><div class="card-hl"><div class="cico ${ciCls}"><i class="ti ${ico}"></i></div>
+      <div><div class="ct">${title}</div><div class="cs">These appear in the review flow</div></div></div></div>
+    <div class="card-bd">
+      ${S[key].map((q,i)=>`<div style="display:flex;align-items:center;gap:8px;margin-bottom:7px">
+        <span style="font-size:12px;color:var(--t0);flex:1">${H(q)}</span>
+        <button class="btn btn-sm btn-del" onclick="removeItem('${key}',${i})"><i class="ti ti-trash"></i></button>
+      </div>`).join('')}
+      <div class="add-row" style="margin-top:10px">
+        <input id="ni-${key}" placeholder="Add new question…" onkeydown="if(event.key==='Enter')addItem('${key}','question')">
+        <button class="btn" onclick="addItem('${key}','question')"><i class="ti ti-plus"></i> Add</button>
+      </div>
+    </div>
+  </div>`;
+
+  return `
+  <div class="settings-tabs">${tabs.map(tb=>`<button class="stab${t===tb.id?' on':''}" onclick="setSTab('${tb.id}')"><i class="ti ${tb.ico}"></i> ${tb.label}</button>`).join('')}</div>
+  ${t==='mistakes'   ?listSection('mistakes','Mistake Tags','ti-alert-circle','ci-r','mistake type'):''}
+  ${t==='improvements'?listSection('improvements','Improvement Actions','ti-bulb','ci-y','improvement action'):''}
+  ${t==='emotions'   ?listSection('emotions','Emotional States','ti-brain','ci-p','emotional state'):''}
+  ${t==='tradeTypes' ?listSection('tradeTypes','Trade Types','ti-layers-intersect','ci-b','trade type'):''}
+  ${t==='sessions'   ?listSection('sessions','Sessions','ti-clock','ci-n','session name'):''}
+  ${t==='winQs'      ?questionSection('winQs','Win Trade Review Questions','ti-trending-up','ci-g'):''}
+  ${t==='lossQs'     ?questionSection('lossQs','Loss Trade Review Questions','ti-trending-down','ci-r'):''}
+  ${t==='weeklyQs'   ?questionSection('weeklyQs','Weekly Review Questions','ti-calendar-week','ci-b'):''}
+  ${t==='data'?`
+  <div class="card">
+    <div class="card-hd"><div class="card-hl"><div class="cico ci-n"><i class="ti ti-database"></i></div>
+      <div><div class="ct">Data Management</div><div class="cs">${S.trades.length} trades · ${approvedTrades().length} approved · ${queuedTrades().length} queued</div></div></div></div>
+    <div class="card-bd">
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn" onclick="doJSON()"><i class="ti ti-download"></i> Export JSON</button>
+        <button class="btn" onclick="doCSV()"><i class="ti ti-file-spreadsheet"></i> Export CSV</button>
+        <button class="btn btn-del" onclick="doClear()"><i class="ti ti-trash"></i> Clear All Trades</button>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-hd"><div class="card-hl"><div class="cico ci-r"><i class="ti ti-refresh"></i></div>
+      <div><div class="ct">Reset Customizations</div><div class="cs">Restore all review lists to defaults</div></div></div></div>
+    <div class="card-bd">
+      <button class="btn btn-del" onclick="doReset()"><i class="ti ti-refresh"></i> Reset to Defaults</button>
+    </div>
+  </div>`:''}`;
+}
+function setSTab(t){S.stab=t;render()}
+function addItem(key,ph){
+  const el=document.getElementById(`ni-${key}`); if(!el)return;
+  const v=el.value.trim(); if(!v)return;
+  S[key].push(v); persist(); render();
+}
+function removeItem(key,i){
+  if(!confirm('Remove this item?'))return;
+  S[key].splice(i,1); persist(); render();
+}
+function doJSON(){
+  const b=new Blob([JSON.stringify(S.trades,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='mnq-'+new Date().toISOString().slice(0,10)+'.json';a.click();
+}
+function doCSV(){
+  const h=['Date','Direction','TradeType','Entry','Exit','Size','SL','TP','PlannedRR','PnL','Session','Status','Mistakes','Emotions','Retake','Problem','ShouldHave','Warning','Notes'];
+  const rows=S.trades.map(t=>[
+    new Date(t.ts).toISOString(),t.direction,t.tradeType||'',t.entry,t.exit,t.size,
+    t.sl||'',t.tp||'',t.plannedRR||'',t.pnl||'',t.session||'',t.status,
+    (t.review?.mistakes||[]).join('; '),(t.review?.emotions||[]).join('; '),
+    t.review?.retake||'',
+    (t.review?.problem||'').replace(/[,\n]/g,' '),
+    (t.review?.shouldhave||'').replace(/[,\n]/g,' '),
+    (t.review?.warning||'').replace(/[,\n]/g,' '),
+    (t.notes||'').replace(/[,\n]/g,' '),
+  ]);
+  const csv=[h,...rows].map(r=>r.join(',')).join('\n');
+  const b=new Blob([csv],{type:'text/csv'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='mnq-'+new Date().toISOString().slice(0,10)+'.csv';a.click();
+}
+function doClear(){
+  if(!confirm('DELETE ALL TRADES? This cannot be undone.'))return;
+  if(!confirm('Are you absolutely sure?'))return;
+  S.trades=[];persist();render();
+}
+function doReset(){
+  if(!confirm('Reset ALL customizations to defaults? Your trades will NOT be deleted.'))return;
+  S.mistakes=DEF.mistakes.slice();S.improvements=DEF.improvements.slice();
+  S.emotions=DEF.emotions.slice();S.tradeTypes=DEF.tradeTypes.slice();
+  S.sessions=DEF.sessions.slice();S.winQs=DEF.winQs.slice();
+  S.lossQs=DEF.lossQs.slice();S.weeklyQs=DEF.weeklyQs.slice();
+  persist();render();
+}
+
+// ════════════════════════════════════════════════════════════════
+//  INIT
+// ════════════════════════════════════════════════════════════════
+render();
+</script>
+</body>
+</html>
